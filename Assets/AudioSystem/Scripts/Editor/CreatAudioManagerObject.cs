@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 
 public class CreatAudioManagerObject
@@ -12,7 +12,7 @@ public class CreatAudioManagerObject
 
         if (prefab == null)
         {
-            Debug.LogError("AudioManager ÇÁ¸®ÆÕÀ» Ã£À» ¼ö ¾øÀ½");
+            Debug.LogError("AudioManager í”„ë¦¬íŒ¹ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ");
             return;
         }
 
