@@ -7,7 +7,7 @@ namespace AudioSystem
 {
     public class AudioManager : MonoBehaviour
     {
-        [SerializeField] private AudioDatabase audioDatabase;
+        [SerializeField] private AudioSystemConfig audioConfig;
         [SerializeField] private AudioMixer mainMixer;
         [SerializeField] private int poolCount = 3;
 
@@ -172,20 +172,37 @@ namespace AudioSystem
         {
             audioMap.Clear();
 
-            AddToAudioMap(audioDatabase.bgmList);
-            AddToAudioMap(audioDatabase.sfxList);
+            if (audioConfig == null)
+            {
+                Debug.LogError("[AudioManager] AudioSystemConfig is null");
+                return;
+            }
+
+            foreach (var db in audioConfig.audioDatabases)
+            {
+                if (db == null) continue;
+
+                AddToAudioMap(db.bgmList);
+                AddToAudioMap(db.sfxList);
+            }
         }
         private void AddToAudioMap(IEnumerable<AudioData> list)
         {
             foreach (var s in list)
             {
-                if (audioMap.ContainsKey(s.key))
+                if (s == null || string.IsNullOrEmpty(s.key))
                 {
-                    Debug.LogError($"[AudioManager] Duplicate key detected: {s.key}");
+                    Debug.LogWarning("[AudioManager] Invalid AudioData (null or empty key)");
                     continue;
                 }
 
-                audioMap[s.key] = s;
+                if (audioMap.ContainsKey(s.key))
+                {
+                    Debug.LogError($"[AudioManager] Duplicate key detected: {s.key} (Skipped)");
+                    continue;
+                }
+
+                audioMap.Add(s.key, s);
             }
         }
 

@@ -10,6 +10,8 @@ public class AudioDatabaseEditor : Editor
 
         GUILayout.Space(10);
 
+        EditorGUILayout.LabelField("Audio System Tools", EditorStyles.boldLabel);
+
         if (GUILayout.Button("Generate Sound Keys"))
         {
             AudioKeyGenerator.Generate();
