@@ -9,9 +9,12 @@ public class AudioManager_test : MonoBehaviour
 
     public Transform obj;
 
+    AudioHandle handle;
+
+
     private void Start()
     {
-        AudioManager.PlaySFX(AudioKeys.SFX.SampleSFX_01);
+        // AudioManager.PlaySFX(AudioKeys.SFX.SampleSFX_01);
     }
 
     private void Update()
@@ -22,6 +25,11 @@ public class AudioManager_test : MonoBehaviour
 
     public void PlaySampleSFX()
     {
-        AudioManager.PlaySFX(AudioKeys.SFX.SampleSFX_01, obj.position);
+        handle = AudioManager.PlaySFX(AudioKeys.SFX.SampleSFX_01, obj.position, true);
+    }
+
+    public void StopSampleSFX()
+    {
+        AudioManager.StopSFX(handle);
     }
 }

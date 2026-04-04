@@ -11,6 +11,8 @@ namespace AudioSystem
         [SerializeField] private AudioMixer mainMixer;
         [SerializeField] private int poolCount = 3;
 
+        private Dictionary<string, float> _volumeCache = new Dictionary<string, float>();
+
         private Dictionary<string, AudioData> audioMap = new();
 
         private AudioSource bgmSource;
@@ -30,18 +32,34 @@ namespace AudioSystem
         /// <summary>
         /// 마스터 볼륨 조절 (0 ~ 1)
         /// </summary>
-        /// <param name="volume"></param>
-        public static void SetMasterVolume(float volume) => I?.SetMasterVolume_Internal(volume);
+        /// <param name="volume">0.f ~ 1.f</param>
+        public static void SetMasterVolume(float volume) => I.SetMasterVolume_Internal(volume);
         /// <summary>
         /// BGM 볼륨 조절 (0 ~ 1)
         /// </summary>
-        /// <param name="volume"></param>
-        public static void SetBGMVolume(float volume) => I?.SetBGMVolume_Internal(volume);
+        /// <param name="volume">0.f ~ 1.f</param>
+        public static void SetBGMVolume(float volume) => I.SetBGMVolume_Internal(volume);
         /// <summary>
         /// SFX 볼륨 조절 (0 ~ 1)
         /// </summary>
-        /// <param name="volume"></param>
-        public static void SetSFXVolume(float volume) => I?.SetSFXVolume_Internal(volume);
+        /// <param name="volume">0.f ~ 1.f</param>
+        public static void SetSFXVolume(float volume) => I.SetSFXVolume_Internal(volume);
+
+        /// <summary>
+        /// Master 볼륨 반환 (0 ~ 1)
+        /// </summary>
+        /// <returns></returns>
+        public static float GetMasterVolume() => I.GetMasterVolume_Internal();
+        /// <summary>
+        /// BGM 볼륨 반환 (0 ~ 1)
+        /// </summary>
+        /// <returns></returns>
+        public static float GetBGMVolume() => I.GetBGMVolume_Internal();
+        /// <summary>
+        /// SFX 볼륨 반환 (0 ~ 1)
+        /// </summary>
+        /// <returns></returns>
+        public static float GetSFXVolume() => I.GetSFXVolume_Internal();
 
         // SFX
         /// <summary>
@@ -53,7 +71,7 @@ namespace AudioSystem
         /// <param name="loop">반복 여부</param>
         /// <returns></returns>
         public static AudioHandle PlaySFX(string key, bool loop = false)
-            => I?.PlaySFX_2D(key, loop);
+            => I.PlaySFX_2D(key, loop);
 
         /// <summary>
         /// SFX 재생 (3D 전용)
@@ -65,13 +83,13 @@ namespace AudioSystem
         /// <param name="loop">반복 여부</param>
         /// <returns></returns>
         public static AudioHandle PlaySFX(string key, Vector3 position, bool loop = false)
-            => I?.PlaySFX_3D(key, position, loop);
+            => I.PlaySFX_3D(key, position, loop);
 
         /// <summary>
         /// SFX 중지 (handle)
         /// </summary>
         /// <param name="handle">PlaySFX의 반환값. 고유 ID</param>
-        public static void StopSFX(AudioHandle handle) => I?.StopSFX_Internal(handle);
+        public static void StopSFX(AudioHandle handle) => I.StopSFX_Internal(handle);
 
         /// <summary>
         /// SFX 중지 (오디오 키)
@@ -79,19 +97,19 @@ namespace AudioSystem
         /// 해당하는 모든 SFX 중지
         /// </summary>
         /// <param name="key">오디오 키</param>
-        public static void StopSFX(string key) => I?.StopSFX_Internal(key);
+        public static void StopSFX(string key) => I.StopSFX_Internal(key);
 
         /// <summary>
         /// 모든 효과음 재생을 멈춘다
         /// (주의!!! 현재 모든 Handle은 유효성을 잃게 됩니다)
         /// </summary>
-        public static void StopAllSFX() => I?.StopAllSFX_Internal();
+        public static void StopAllSFX() => I.StopAllSFX_Internal();
 
         // BGM
 
-        public static void PlayBGM(string key) => I?.PlayBGM_Internal(key);
+        public static void PlayBGM(string key) => I.PlayBGM_Internal(key);
 
-        public static void StopBGM(float duration = 0f) => I?.StopBGM_Internal(duration);
+        public static void StopBGM(float duration = 0f) => I.StopBGM_Internal(duration);
 
 
         public static int GetSFXpoolCount()
@@ -239,6 +257,29 @@ namespace AudioSystem
             }
 
             mainMixer.SetFloat(parameterName, dB);
+
+            _volumeCache[parameterName] = volume;
+        }
+
+        public float GetMasterVolume_Internal() => GetMixerVolume("MasterVol");
+        public float GetBGMVolume_Internal() => GetMixerVolume("BGMVol");
+        public float GetSFXVolume_Internal() => GetMixerVolume("SFXVol");
+
+        private float GetMixerVolume(string parameterName)
+        {
+            if (_volumeCache.TryGetValue(parameterName, out float cachedValue))
+            {
+                return cachedValue;
+            }
+
+            if (mainMixer.GetFloat(parameterName, out float dbValue))
+            {
+                float linear = Mathf.Pow(10, dbValue / 20);
+                _volumeCache[parameterName] = linear;
+                return linear;
+            }
+
+            return 0f;
         }
 
         #endregion
@@ -507,6 +548,13 @@ namespace AudioSystem
         {
             handleId = null;
             key = null;
+        }
+
+
+        public bool IsValid(Dictionary<string, (AudioSource, string, uint)> active)
+        {
+            return active.TryGetValue(handleId, out var data)
+                && data.Item3 == version;
         }
     }
 
