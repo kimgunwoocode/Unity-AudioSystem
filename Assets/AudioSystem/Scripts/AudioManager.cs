@@ -313,7 +313,17 @@ namespace AudioSystem
 
         private AudioHandle PlaySFXInternal(string key, Vector3? position, bool loop)
         {
-            if (!audioMap.TryGetValue(key, out var audio)) return null;
+            if (!audioMap.TryGetValue(key, out var audio))
+            {
+                Debug.LogWarning($"[AudioManager] SFX key not found: {key}");
+                return null;
+            }
+
+            if (audio.clip == null)
+            {
+                Debug.LogWarning($"[AudioManager] Audio clip is null: {key}");
+                return null;
+            }
 
             AudioSource source = GetAvailableAudioSource();
             if (source == null) return null;
@@ -331,7 +341,6 @@ namespace AudioSystem
 
             ApplyAudioSource(source, audio, loop);
 
-            if (audio.clip == null) return null;
             source.Play();
 
 
@@ -457,6 +466,7 @@ namespace AudioSystem
             }
 
             // 부족하면 생성
+            Debug.Log("[AudioManager] SFX pool empty, creating new AudioSource");
             return CreateNewSFXSource();
         }
 
@@ -488,15 +498,24 @@ namespace AudioSystem
 
         public void PlayBGM_Internal(string key)
         {
-            if (audioMap.TryGetValue(key, out var audio))
+            if (!audioMap.TryGetValue(key, out var audio))
             {
-                bgmSource.clip = audio.clip;
-                bgmSource.volume = audio.volume;
-                bgmSource.pitch = audio.pitch;
-                bgmSource.loop = true;
-
-                bgmSource.Play();
+                Debug.LogWarning($"[AudioManager] BGM key not found: {key}");
+                return;
             }
+
+            if (audio.clip == null)
+            {
+                Debug.LogWarning($"[AudioManager] Audio clip is null: {key}");
+                return;
+            }
+
+            bgmSource.clip = audio.clip;
+            bgmSource.volume = audio.volume;
+            bgmSource.pitch = audio.pitch;
+            bgmSource.loop = true;
+
+            bgmSource.Play();
         }
 
 
@@ -505,7 +524,10 @@ namespace AudioSystem
         public void StopBGM_Internal(float duration = 0f)
         {
             if (fadeOutCoroutine != null)
+            {
+                Debug.LogWarning("[AudioManager] BGM is already fading out");
                 return;
+            }
 
             if (duration <= 0f)
             {

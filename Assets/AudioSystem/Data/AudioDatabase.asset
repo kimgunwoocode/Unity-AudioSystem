@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AudioDatabase
   m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
   bgmList:
-  - key: 
-    clip: {fileID: 0}
+  - key: SampleBGM_02
+    clip: {fileID: 8300000, guid: 60d3df94fc2ac324ca481a73846bd509, type: 3}
     volume: 1
     pitch: 1
   sfxList:
   - key: SampleSFX_01
-    clip: {fileID: 8300000, guid: 60d3df94fc2ac324ca481a73846bd509, type: 3}
+    clip: {fileID: 8300000, guid: f7a453b2f1e153248b6d9314e8905a1e, type: 3}
     volume: 1
     pitch: 1
