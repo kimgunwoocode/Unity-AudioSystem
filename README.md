@@ -191,4 +191,4 @@ MIT License
 ## 링크 (Links)
 
 * 메인 저장소: [https://github.com/kimgunwoocode/Unity-AudioSystem.git](https://github.com/kimgunwoocode/Unity-AudioSystem.git)
-* unitypackage: [https://github.com/kimgunwoocode/Unity-AudioSystem.git](https://github.com/kimgunwoocode/Unity-AudioSystem.git)
+* unitypackage: [https://github.com/kimgunwoocode/Unity-AudioSystem/tree/Custom-Package](https://github.com/kimgunwoocode/Unity-AudioSystem/tree/Custom-Package)
