@@ -49,7 +49,6 @@ SetBGMVolume(float volume);
 SetSFXVolume(float volume);
 ```
 
----
 
 ### SFX
 
@@ -78,46 +77,41 @@ int GetSFXpoolCount();
 int GetActiveSFXCount();
 ```
 
-
+---
   
 ## 설치 방법 (Installation)
 
-### 1. Unity에 AudioSystem 추가
+### 1. Unity에 AudioSystem 추가  
 
-#### 직접 스크립트 추가
-main 브랜치에서 AudioSystem 폴더를 복사
-Unity 프로젝트의 Assets 폴더에 붙여넣기
+#### - 직접 스크립트 추가  
+main 브랜치에서 AudioSystem 폴더를 복사  
+Unity 프로젝트의 Assets 폴더에 붙여넣기  
 
-#### Unity Custom Package로 추가
-custom-package 브랜치에서 AudioSystem.unitypackage 다운로드
-Unity에서 다음 메뉴 선택
-&emsp; Assets > Import Package > Custom Package
-다운로드한 AudioSystem.unitypackage 파일 선택 후 Import
+#### - Unity Custom Package로 추가  
+custom-package 브랜치에서 AudioSystem.unitypackage 다운로드  
+Unity에서 다음 메뉴 선택  
+&emsp; Assets > Import Package > Custom Package  
+다운로드한 AudioSystem.unitypackage 파일 선택 후 Import  
 
-_추후 UPM으로 배포 예정_
+_..._
+> _추후 UPM으로 배포 예정_
+> 
 _..._
 
 ### 2. Unity 초기 설정
 
-#### AudioManager 생성
-Hierarchy 창에서 우클릭
-Audio > AudioManager 선택
---> 씬에 AudioManager 프리팹이 생성됩니다.
+#### AudioManager 생성  
+Hierarchy 창에서 우클릭  
+Audio > AudioManager 선택  
+--> 씬에 AudioManager 프리팹이 생성됩니다.  
 
 #### AudioDatabase 생성
-Project 창에서 우클릭
-Create > Audio > AudioDatabase 선택
---> 오디오 클립 관리를 위한 ScriptableObject가 생성됩니다. (복수 생성 가능)
+Project 창에서 우클릭  
+Create > Audio > AudioDatabase 선택  
+--> 오디오 클립 관리를 위한 ScriptableObject가 생성됩니다. (복수 생성 가능)  
 
 _AudioDatabase 사용 방법은 별도 문서에서 설명_
 
----
-
-### 2. AudioManager 설정
-
-* 빈 GameObject 생성
-* `AudioManager` 컴포넌트 추가
-* `AudioSystemConfig` 및 `AudioMixer` 연결
 
 
 ---
@@ -156,7 +150,7 @@ AudioSystem/
 
 ---
   
-## ⚠️ 주의사항 (Notes)
+## 주의사항 (Notes)
 
 * AudioSystem폴더와 그 하위폴더의 위치 변경 금지
 * `AudioHandle`은 재사용되므로 장기간 보관 시 주의 필요
@@ -180,7 +174,7 @@ AudioSystem/
 
 ---
   
-## 📚 문서 (Documentation)
+## 문서 (Documentation)
 
 * [사용 가이드](docs/USAGE.md)
 * [개발자 가이드](docs/DEV.md)
@@ -188,12 +182,12 @@ AudioSystem/
 
 ---
   
-## 📄 라이선스 (License)
+## 라이선스 (License)
 
 MIT License
 
 ---
   
-## 🔗 링크 (Links)
+## 링크 (Links)
 
 * 메인 저장소: [https://github.com/yourname/your-repo](https://github.com/kimgunwoocode/Unity-AudioSystem.git)
