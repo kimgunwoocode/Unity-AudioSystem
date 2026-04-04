@@ -83,9 +83,13 @@ _AudioDatabase 사용 방법은 별도 문서에서 설명_
 ### Volume
 
 ```csharp id="8y1xk3"
-SetMasterVolume(float volume);
-SetBGMVolume(float volume);
-SetSFXVolume(float volume);
+void SetMasterVolume(float volume);
+void SetBGMVolume(float volume);
+void SetSFXVolume(float volume);
+
+float GetMasterVolume();
+float GetBGMVolume();
+float GetSFXVolume();
 ```
 
 
