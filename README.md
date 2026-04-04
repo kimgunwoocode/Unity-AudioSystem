@@ -173,6 +173,7 @@ AudioSystem/
 &emsp;* 다음 씬까지 유지 여부 (DontDestroyOnLoad)
 &emsp;*  씬에 없을 경우 자동 생성 여부
 * SFX Fade In / Fade Out 지원
+* 기타 음향 효과 추가
 * AudioGroup 기반 관리 시스템
 * Addressables 연동
 * Async 로딩 지원
