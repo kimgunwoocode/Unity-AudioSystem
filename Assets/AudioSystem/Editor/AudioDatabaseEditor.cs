@@ -12,7 +12,7 @@ public class AudioDatabaseEditor : Editor
 
         EditorGUILayout.LabelField("Audio System Tools", EditorStyles.boldLabel);
 
-        if (GUILayout.Button("Generate Sound Keys"))
+        if (GUILayout.Button("Generate Audio Keys"))
         {
             AudioKeyGenerator.Generate();
         }

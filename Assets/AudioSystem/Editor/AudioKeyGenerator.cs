@@ -5,7 +5,7 @@ using System.Text;
 
 public class AudioKeyGenerator : Editor
 {
-    [MenuItem("Tools/AudioSystem/Generate Sound Keys")]
+    [MenuItem("Tools/AudioSystem/Generate Audio Keys")]
     public static void Generate()
     {
         // 1. SoundData 에셋을 찾아옵니다. (경로가 정확해야 합니다)
