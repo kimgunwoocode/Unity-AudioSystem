@@ -145,11 +145,11 @@ AudioSystem/
 
 ---
   
-## 주의사항 (Notes)
+## Notes
 
 * AudioSystem폴더와 그 하위폴더의 위치 변경 금지
 * `AudioHandle`은 재사용되므로 장기간 보관 시 주의 필요
-* `StopAllSFX()` 호출 시 모든 handle은 무효화됨
+* `StopAllSFX()` 등에 의해 멈춘 AudioHandle은 무효화됨
 * 잘못된 handle(version mismatch)은 자동으로 무시됨
 * loop 사운드는 반드시 handle로 관리하는 것을 권장
 
