@@ -499,15 +499,21 @@ namespace AudioSystem
             }
         }
 
+
+        private Coroutine fadeOutCoroutine = null;
+
         public void StopBGM_Internal(float duration = 0f)
         {
+            if (fadeOutCoroutine != null)
+                return;
+
             if (duration <= 0f)
             {
                 bgmSource.Stop();
             }
             else
             {
-                StartCoroutine(FadeOutBGM(duration));
+                fadeOutCoroutine = StartCoroutine(FadeOutBGM(duration));
             }
         }
 
@@ -525,6 +531,8 @@ namespace AudioSystem
 
             bgmSource.Stop();
             bgmSource.volume = startVolume;
+
+            fadeOutCoroutine = null;
         }
 
         #endregion
