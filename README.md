@@ -2,7 +2,7 @@
 
 ScriptableObject 기반 키 자동 생성과 Handle 제어를 지원하는 Unity 오디오 시스템  
 Handle 기반으로 SFX를 개별 제어하고, 자동 생성된 키로 오타 없는 오디오 사용을 보장합니다.  
-(AudioSource Pooling + 2D/3D SFX 지원)
+(AudioSource Pooling + 2D/~~3D~~ SFX 지원)
 
 ---
   
