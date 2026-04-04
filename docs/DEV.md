@@ -25,9 +25,7 @@ AudioManager 사용 중 발생할 수 있는 로그들을 정리한 문서입니
 
 ### 2. 중복 Key
 ```
-
 [AudioManager] Duplicate key detected: {key} (Skipped)
-
 ```
 
 - **원인**
@@ -104,9 +102,7 @@ AudioManager 사용 중 발생할 수 있는 로그들을 정리한 문서입니
 
 ### 5. Handle 찾을 수 없음
 ```
-
 [AudioManager] handleID not found : {handleId}
-
 ```
 
 - **원인**
@@ -117,9 +113,7 @@ AudioManager 사용 중 발생할 수 있는 로그들을 정리한 문서입니
 
 ### 6. SFX Pool 부족
 ```
-
 [AudioManager] SFX pool empty, creating new AudioSource
-
 ```
 
 - **원인**
