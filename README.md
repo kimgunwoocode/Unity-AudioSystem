@@ -82,7 +82,7 @@ _AudioDatabase 사용 방법은 별도 문서에서 설명_
 
 ### Volume
 
-```csharp id="8y1xk3"
+```csharp
 void SetMasterVolume(float volume);
 void SetBGMVolume(float volume);
 void SetSFXVolume(float volume);
@@ -95,7 +95,7 @@ float GetSFXVolume();
 
 ### SFX
 
-```csharp id="x92mfa"
+```csharp
 AudioHandle PlaySFX(string key, bool loop = false);
 AudioHandle PlaySFX(string key, Vector3 position, bool loop = false);
 
@@ -107,7 +107,7 @@ void StopAllSFX();
 
 ### BGM
 
-```csharp id="u8t7kl"
+```csharp
 void PlayBGM(string key);
 void StopBGM(float duration = 0f);
 ```
@@ -115,7 +115,7 @@ void StopBGM(float duration = 0f);
 
 ### Debug / Info
 
-```csharp id="r3k9zp"
+```csharp
 int GetSFXpoolCount();
 int GetActiveSFXCount();
 ```
